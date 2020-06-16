@@ -1,0 +1,44 @@
+@model Category
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css"/>
+    <title>Products Page</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-sm-12 text-center">
+            <h1> <a href="/"> Products </a> | Categories </h1>
+        </div> <hr>
+        <div class="row">
+            <div class="col-sm-5">
+                <h2 class="text-center" style="text-decoration: underline;">New Category</h2> <br>
+                <form asp-action="NewCategory" asp-controller="Home" method="POST">
+                    <div class="form-group row">
+                        <label for="Name" class="col-sm-4"> Category Name: </label>
+                        <input asp-for="Name" class="col-sm-6 form-control">
+                    </div>
+                    <div class="form-group row">
+                        <input type="submit" value="Submit" class="col-sm-4 offset-sm-4 btn btn-success">
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-7">
+                <h2 class="text-center" style="text-decoration: underline;">Existing Categories</h2> <br>
+                <div class="CategoryList">
+                    <ul>
+                    @foreach(Category item in ViewBag.AllCategories)
+                    {
+                        <li class="category"> <a href="categoryview/@item.CategoryId">@item.Name</a> </li>
+                    }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+@model Association
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css"/>
+    <title>Category Detail</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-12 text-center"> 
+            <h1> @ViewBag.Category.Name </h1>
+            <a href="/Categories" class="col-12 text-center"> Categories Home </a>
+        </div> <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3 class="text-center" style="text-decoration: underline;"> Products </h3> <br>
+                <ul>
+                    @{
+                        @foreach(var pro in ViewBag.Category.ProCats)
+                        {
+                            <li> @pro.Product.Name </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <form asp-action="AddToProduct" asp-route-ProductId="@ViewBag.Category.CategoryId" asp-controller="Home" method="POST">
+                <div class="form-group row">
+                    <label for="Name" class="col-sm-5">Product: </label>
+                    <select asp-for="CategoryId" class="col-sm-6 form-control">
+                        <option selected="true" disabled="disabled"> select one </option>
+                        @foreach(var item in ViewBag.Product)
+                        {
+                            <option value="@item.ProductId"> @item.Name </option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <input type="submit" value="Submit" class="col-sm-4 offset-sm-5 btn btn-success">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
